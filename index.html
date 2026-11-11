@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Semester 3 Exam & Leave Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;600&family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f7f3;--card:#fff;--ink:#17252a;--mute:#5d6e72;--line:#d5ddd3;--accent:#5b3fd0;--a2:#5b3fd0;--onacc:#fff;--office:#cfe3f5;--half:#fbe3a6;--full:#f6b8b8;--off:#e4ebdd;--warn:#b3261e;--ok:#1f7a4d;--r:12px;--fs:15px;--bc:var(--ink);--cb:var(--line);--bw:1.5px;--sh:3px 3px 0 var(--ink);--cs:none;--grid:#e2e8df;--hbg:transparent;--hfg:var(--ink);--hb:var(--line);--gb:var(--card);--hp:2px 0 6px;--hsh:none;--ringbg:var(--card);--rbc:var(--ink);--rsh:var(--sh);--ringc:var(--accent);--ringt:rgba(23,37,42,.14);--fh:"Bricolage Grotesque",Georgia,serif;--fb:"Instrument Sans",system-ui,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[data-theme=dark]{--bg:#0b1020;--card:#141a2e;--ink:#e6e9f5;--mute:#8f98b8;--line:#262e4a;--accent:#818cf8;--a2:#c084fc;--onacc:#0b1020;--office:#1e3a5f;--half:#5c4a12;--full:#5e2530;--off:#182033;--warn:#ff8a80;--ok:#6ee7b7;--sh:0 6px 20px rgba(0,0,0,.4);color-scheme:dark}
+[data-theme=ocean]{--bg:#eaf6fb;--ink:#0b2b3a;--mute:#4f7284;--line:#cfe5ee;--accent:#0284c7;--a2:#14b8a6;--office:#cdeaf7;--off:#e0eef0}
+[data-theme=sunset]{--bg:#fff4ec;--card:#fffaf6;--ink:#3b1d12;--mute:#8a5f4c;--line:#f1dccd;--accent:#ea580c;--a2:#db2777;--office:#ffe0c2;--full:#ffc2cf;--off:#f7e9df}
+[data-theme=forest]{--bg:#eef5ee;--ink:#14301f;--mute:#557061;--line:#d3e3d6;--accent:#15803d;--a2:#0d9488;--office:#d1e7d6;--off:#e3ede3}
+[data-theme=lavender]{--bg:#f5f0ff;--ink:#231942;--mute:#6f628f;--line:#e2d8f6;--accent:#7c3aed;--a2:#ec4899;--office:#e3d9fb;--full:#fbcfe0;--off:#ece6f7}
+[data-theme=dark],[data-theme=amoled],[data-theme=ocean],[data-theme=sunset],[data-theme=forest],[data-theme=lavender]{--bc:var(--line);--cb:var(--line);--bw:1px;--sh:0 1px 2px rgba(16,24,40,.06),0 6px 20px rgba(16,24,40,.06);--cs:var(--sh);--grid:color-mix(in srgb,var(--ink) 7%,transparent);--hbg:linear-gradient(135deg,var(--accent),var(--a2));--hfg:#fff;--hb:rgba(255,255,255,.4);--gb:rgba(255,255,255,.18);--hp:22px;--hsh:var(--sh);--ringbg:rgba(255,255,255,.16);--rbc:transparent;--rsh:none;--ringc:#fff;--ringt:rgba(255,255,255,.3);--fh:Sora,Georgia,serif;--fb:"DM Sans",system-ui,sans-serif}[data-theme=dark],[data-theme=amoled]{--hfg:#0b1020;--gb:rgba(255,255,255,.3);--sh:0 6px 20px rgba(0,0,0,.4);--cs:var(--sh)}[data-theme=amoled]{--bg:#000;--card:#0a0a0a;--ink:#f2f2f2;--mute:#8a8a8a;--line:#222;--accent:#a78bfa;--a2:#38bdf8;--onacc:#000;--hfg:#000;--office:#12263d;--half:#463a0c;--full:#4a1f26;--off:#121212;--warn:#ff6b6b;--ok:#4ade80;--sh:none;--cs:none;--ringt:rgba(0,0,0,.25);--ringc:#000;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px);font-size:var(--fs)}
+body{margin:0;font-family:var(--fb);color:var(--ink);background-color:var(--bg);background-size:28px 28px;line-height:1.5}
+h1,h2,h3,.big{font-family:var(--fh);margin:0;letter-spacing:-.02em}
+.wrap{max-width:1200px;margin:0 auto;padding:16px 14px 90px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:1.5px solid var(--line);background:var(--card);border-radius:calc(var(--r) - 4px);padding:7px 13px;font-weight:600;transition:transform .12s,box-shadow .12s}
+button:hover{transform:translateY(-1px);box-shadow:var(--sh);border-color:var(--ink)}button:focus-visible,input:focus-visible,select:focus-visible,.day:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+button.pri{background:linear-gradient(135deg,var(--accent),var(--a2));color:var(--onacc);border:0}
+button.ghost,a.ghost{background:var(--gb);color:var(--hfg);border:1.5px solid var(--hb);border-radius:calc(var(--r) - 4px);padding:7px 13px;font-weight:600;text-decoration:none;display:inline-block;cursor:pointer}a.lnk{display:inline-block;margin-top:10px;color:var(--accent);font-weight:600}
+input,select,textarea{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 10px;width:100%}
+.hero{border-radius:calc(var(--r) + 8px);padding:var(--hp);color:var(--hfg);background:var(--hbg);display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;box-shadow:var(--hsh)}
+
+.hero h1{font-size:clamp(26px,4.5vw,40px);font-weight:800;line-height:1.1}.hero .s{opacity:.9;margin-top:6px;max-width:560px}
+.hbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
+.hbar select{width:auto;background:var(--gb);color:inherit;border:1.5px solid var(--hb)}.hbar option{color:#111}
+.ringbox{display:flex;align-items:center;gap:14px;background:var(--ringbg);border:var(--bw) solid var(--rbc);box-shadow:var(--rsh);border-radius:var(--r);padding:12px 16px}
+.ring{width:84px;height:84px;position:relative}.ring svg{transform:rotate(-90deg)}.ring b{position:absolute;inset:0;display:grid;place-items:center;font:700 20px var(--fh)}
+.big{font-size:30px;font-weight:800;line-height:1}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.stat{background:var(--card);border-radius:var(--r);padding:12px 14px;box-shadow:var(--sh);border:var(--bw) solid var(--bc)}
+.stat b{font:800 28px/1.1 var(--fh);display:block}.stat span{color:var(--mute);font-size:.85rem}.stat.bad{--c:var(--warn)}.stat.bad b{color:var(--warn)}
+.alert{background:var(--half);border:var(--bw) solid var(--bc);border-radius:var(--r);padding:11px 14px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.card{background:var(--card);border-radius:var(--r);padding:16px;box-shadow:var(--cs);border:var(--bw) solid var(--cb);margin-bottom:14px}
+.meter{display:flex;gap:4px;margin-top:8px}.meter i{flex:1;height:16px;border-radius:6px;background:var(--off)}
+.meter i.f{background:var(--warn)}.meter i.h{background:linear-gradient(90deg,var(--warn) 50%,var(--off) 50%)}.meter i.p{background:repeating-linear-gradient(45deg,var(--accent) 0 4px,transparent 4px 8px);opacity:.7}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:6px 0 14px;padding-bottom:2px}.tabs button{white-space:nowrap;border-radius:99px}.tabs button.on{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 10px;font-size:.85rem;color:var(--mute)}.legend span:before{content:"";display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:5px;vertical-align:-2px;background:var(--c)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.side{position:sticky;top:10px}@media(max-width:900px){.side{position:static}}
+.cal-head,.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.cal-head div{text-align:center;color:var(--mute);font-size:.8rem;font-weight:600;padding-bottom:3px}
+.month{margin-bottom:18px}.month h3{font-size:20px;margin:2px 0 8px}
+.day{min-height:var(--ch,84px);border-radius:calc(var(--r) - 4px);border:1.5px solid transparent;padding:5px 6px;background:var(--off);position:relative;font-size:.78rem;display:flex;flex-direction:column;gap:1px;overflow:hidden;cursor:pointer;user-select:none;transition:transform .12s,box-shadow .12s}
+.dense .day{min-height:58px}.day:hover{transform:translateY(-2px);box-shadow:var(--sh)}.day.blank{background:none;pointer-events:none;box-shadow:none}
+.day .n{font-weight:700;font-size:.95rem}.day.s-office{background:var(--office)}.day.s-half{background:var(--half)}.day.s-full{background:var(--full)}
+.day.sun .n{color:var(--warn)}.nosun .day.sun .n{color:inherit}
+.day.exam{background:linear-gradient(135deg,var(--accent),var(--a2));color:var(--onacc)}.day.exam .n{color:inherit}
+.day.sel{border-color:var(--ink);box-shadow:2px 2px 0 var(--ink)}.day.today .n:after{content:" · today";font-weight:500;font-size:.65rem}
+.day .x{font-weight:700;line-height:1.15}.day .h{margin-top:auto;opacity:.7;font-size:.72rem}.noh .day .h{display:none}
+.day .w{position:absolute;right:4px;top:4px;font-size:.65rem;background:var(--ink);color:var(--card);border-radius:99px;padding:0 6px}
+.day .c{position:absolute;right:5px;bottom:3px;color:var(--warn);font-weight:800;font-size:1rem}.exam .c{color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.chip{background:var(--off);border-radius:99px;padding:2px 11px;font-size:.8rem;font-weight:600}
+.chip.bud{cursor:pointer;background:var(--office)}
+.seg{display:flex;gap:6px;margin:10px 0}.seg button{flex:1}.seg button.on{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.plan{padding-left:18px;margin:6px 0}.warn{color:var(--warn);font-weight:600}.ok{color:var(--ok);font-weight:600}.mute{color:var(--mute)}
+label.l{display:block;font-size:.8rem;color:var(--mute);margin:10px 0 3px;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:.85rem}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:600}
+.scroll{overflow-x:auto}.pbar{height:8px;background:var(--off);border-radius:9px;overflow:hidden;min-width:70px}.pbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--a2))}
+.tag{padding:2px 9px;border-radius:99px;font-size:.75rem;font-weight:700;background:var(--off)}.tag.t{background:var(--full)}.tag.g{background:#d1fae5;color:#065f46}[data-theme=dark] .tag.g,[data-theme=amoled] .tag.g{background:#064e3b;color:#a7f3d0}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}.g3{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.wd{display:flex;gap:6px;flex-wrap:wrap}.wd label{background:var(--off);border-radius:99px;padding:3px 11px;display:flex;gap:5px;align-items:center}.wd input{width:auto}
+.subj{border:1px solid var(--line);border-radius:var(--r);padding:12px;background:var(--card)}.subj .row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+.topic{display:flex;gap:8px;align-items:center;padding:2px 0}.topic input[type=checkbox]{width:auto}.topic.d span{text-decoration:line-through;color:var(--mute)}.topic button{padding:0 8px}
+.mini{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0;font-size:.8rem;color:var(--mute)}.mini b{color:var(--ink)}
+.gantt{display:grid;gap:3px;font-size:.7rem;min-width:max-content}.gantt .gr{display:flex;gap:2px;align-items:center}.gantt .gl{width:130px;flex:none;font-weight:600;font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gc{width:22px;height:22px;border-radius:5px;background:var(--off);display:grid;place-items:center;flex:none;font-size:.65rem;color:var(--mute)}
+.gc.p{background:color-mix(in srgb,var(--accent) 28%,var(--card))}.gc.x{background:var(--accent);color:var(--onacc);font-weight:700}.gc.l{box-shadow:inset 0 -3px 0 var(--warn)}.gc.sn{opacity:.5}
+.heat{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:4px}.heat div{border-radius:8px;padding:4px;font-size:.7rem;text-align:center;background:color-mix(in srgb,var(--accent) var(--p),var(--card))}
+.bars .br{display:grid;grid-template-columns:140px 1fr 90px;gap:8px;align-items:center;margin:6px 0;font-size:.85rem}.bars .tr{height:12px;background:var(--off);border-radius:9px;position:relative}.bars .tr i{display:block;height:100%;border-radius:9px;background:var(--accent)}
+.sug{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+dialog{max-width:640px;width:calc(100% - 24px);border:0;border-radius:calc(var(--r) + 6px);background:var(--card);color:var(--ink);padding:20px;max-height:88vh;box-shadow:var(--sh)}dialog::backdrop{background:rgba(0,0,0,.45)}
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}.themes button{padding:8px;text-align:left}.themes button.on{outline:3px solid var(--accent)}.themes i{display:block;height:20px;border-radius:6px;margin-bottom:5px}
+.dots{display:flex;gap:6px}.dots button{width:22px;height:22px;padding:0;border-radius:50%;border:2px solid #fff}
+.sw{display:flex;gap:10px;align-items:center;margin:8px 0}.sw input[type=checkbox]{width:auto}.sw input[type=range]{padding:0}
+
+
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--card);padding:8px 16px;border-radius:99px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}#toast.on{opacity:1}
+@media(max-width:600px){.bars .br{grid-template-columns:90px 1fr 70px}}
+@keyframes pop{from{opacity:0;transform:scale(.85) translateY(6px)}to{opacity:1;transform:none}}@keyframes pulse{50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 30%,transparent)}}@keyframes blink{50%{opacity:.3}}@keyframes fall{to{transform:translate(var(--dx),105vh) rotate(720deg);opacity:.2}}.enter .day{animation:pop .4s both}.fx .day.today{animation:pulse 2.4s infinite}.fx .day .c{animation:blink 1.2s infinite}.fx .day.exam:hover{transform:translateY(-3px) rotate(-1.2deg)}.cf{position:fixed;top:-12px;width:9px;height:14px;z-index:20;pointer-events:none;animation:fall 2.2s ease-in forwards}.strip{display:flex;gap:10px;overflow-x:auto;margin-bottom:12px;padding:2px 2px 8px}.sc{flex:none;min-width:150px;background:var(--card);border:var(--bw) solid var(--bc);border-radius:var(--r);padding:8px 12px;box-shadow:var(--sh);font-size:.85rem}.sc b{font:800 22px/1.1 var(--fh);display:block}.sc.urgent{border-color:var(--warn)}.sc.urgent b{color:var(--warn)}.chk{display:flex;gap:8px;align-items:center;padding:1px 0}.chk input{width:auto}.leave{background:var(--off);border-radius:10px;padding:6px 10px;margin:8px 0;font-size:.85rem}.row2{display:grid;grid-template-columns:1fr 70px auto;gap:6px;margin-top:6px}
+
+:root{--ca:var(--accent);--cb2:var(--accent);--cf:#fff;--hgrid:none;--hem1:var(--accent);--hem2:var(--accent);--hbd:transparent}
+[data-theme=dark],[data-theme=amoled],[data-theme=ocean],[data-theme=sunset],[data-theme=forest],[data-theme=lavender]{--hp:30px 28px;--hfg:#fff;--gb:rgba(255,255,255,.07);--hb:rgba(255,255,255,.16);--ringbg:rgba(255,255,255,.06);--rbc:rgba(255,255,255,.16);--ringt:rgba(255,255,255,.16);--ringc:#fff;--ca:#fff;--cb2:#e9ecff;--cf:#0b0f1a;--hbd:rgba(255,255,255,.12);--hem1:color-mix(in srgb,var(--accent) 45%,#fff);--hem2:color-mix(in srgb,var(--a2) 45%,#fff);--hbase:color-mix(in srgb,var(--ink) 94%,var(--accent));--hgrid:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);--hbg:radial-gradient(620px 300px at 6% -10%,color-mix(in srgb,var(--accent) 75%,transparent),transparent 70%),radial-gradient(560px 340px at 100% 110%,color-mix(in srgb,var(--a2) 60%,transparent),transparent 70%),var(--hbase)}
+[data-theme=dark]{--hbase:#0a0e1c}[data-theme=amoled]{--hbase:#000;--hbd:rgba(167,139,250,.35)}
+.hero{position:relative;overflow:hidden;border:1px solid var(--hbd);align-items:stretch;gap:22px}
+.hero:before{content:"";position:absolute;inset:0;background:var(--hgrid);background-size:34px 34px;-webkit-mask-image:radial-gradient(circle at 25% 0%,#000,transparent 72%);mask-image:radial-gradient(circle at 25% 0%,#000,transparent 72%);pointer-events:none}
+.hero>*{position:relative}.hl{flex:1;min-width:280px;display:flex;flex-direction:column;align-items:flex-start}
+.hero h1{font-size:clamp(32px,5.2vw,54px);line-height:1.04;margin:14px 0 0}.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--hem1),var(--hem2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:.78rem;font-weight:600;padding:4px 12px;border-radius:99px;border:1px solid var(--hb);background:var(--gb)}
+.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 30%,transparent)}
+.chips2{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 20px}.chips2 span{padding:4px 12px;border-radius:99px;background:var(--gb);border:1px solid var(--hb);font-size:.85rem}
+.acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:auto}
+.cta{background:linear-gradient(135deg,var(--ca),var(--cb2));color:var(--cf);border:0;font-weight:700;padding:10px 20px;border-radius:99px;box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 40%,transparent)}
+.acts select{width:auto;border-radius:99px;background:var(--gb);color:inherit;border:1px solid var(--hb);padding:9px 14px}.acts option{color:#111}
+.grp{display:flex;border-radius:99px;overflow:hidden;border:1px solid var(--hb);background:var(--gb)}.grp button{border:0;border-radius:0;background:transparent;color:inherit;box-shadow:none;padding:9px 15px}.grp button+button{border-left:1px solid var(--hb)}.grp button:hover{transform:none;box-shadow:none;background:rgba(127,127,127,.18)}
+a.hub{border-radius:99px;padding:9px 16px}
+.dots{display:flex;gap:7px;padding:6px 10px;border-radius:99px;background:var(--gb);border:1px solid var(--hb)}.dots button{width:18px;height:18px;border:2px solid rgba(255,255,255,.85);box-shadow:none}.dots button.on{outline:2px solid var(--hfg);outline-offset:2px}.dots button:hover{transform:scale(1.2)}
+.ringbox{flex-direction:column;align-items:stretch;gap:12px;width:310px;max-width:100%;padding:18px 20px;backdrop-filter:blur(10px)}
+.rbt{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.8rem;font-weight:600}.rbt .pill{padding:2px 10px;border-radius:99px;border:1px solid var(--hb)}
+.rbm{display:flex;align-items:center;justify-content:space-between;gap:10px}.big2{font:800 60px/1 var(--fh)}.big2 small{font:600 .9rem var(--fb);margin-left:6px;opacity:.8}.big2.u{color:#ff8f80}
+.nm{font:700 1.15rem/1.2 var(--fh)}.rbf{display:flex;justify-content:space-between;font-size:.82rem;opacity:.9;border-top:1px solid var(--hb);padding-top:10px}
+.ring b small{display:block;font:500 .6rem var(--fb);opacity:.8}
+.prof{display:flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;border-radius:99px;background:var(--gb);border:1px solid var(--hb);color:inherit;text-align:left;margin-bottom:14px;flex-wrap:wrap}
+.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:700 .95rem var(--fh);color:#fff;flex:none;box-shadow:0 0 0 2px var(--hb)}
+.pt{display:flex;flex-direction:column;line-height:1.2}.pt b{font-size:.95rem}.pt span{font-size:.78rem;opacity:.8}
+.cohort{padding:2px 10px;border-radius:99px;font-size:.72rem;font-weight:700;border:1px solid var(--hb);background:color-mix(in srgb,var(--cc,#a78bfa) 30%,transparent)}
+.cohort[data-c=DU]{--cc:#8b5cf6}.cohort[data-c=Engineering]{--cc:#f59e0b}.cohort[data-c=Law]{--cc:#10b981}
+.jd{font-size:.75rem;opacity:.85;padding-left:10px;border-left:1px solid var(--hb)}
+.wcol{display:flex;flex-direction:column}.bestc{font-weight:800;color:var(--ok)}.bar2{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.lr{display:grid;grid-template-columns:110px 1fr auto;gap:8px;padding:8px 10px;border-radius:10px;margin-bottom:4px;background:var(--off);cursor:pointer;font-size:.85rem}.lr.s-office{background:var(--office)}.lr.s-half{background:var(--half)}.lr.s-full{background:var(--full)}.lr.exam{background:linear-gradient(135deg,var(--accent),var(--a2));color:var(--onacc)}.lr.sel{outline:2px solid var(--ink)}.lr.today{box-shadow:inset 4px 0 0 var(--accent)}
+.sdrow{display:flex;gap:4px;min-width:max-content;padding-bottom:6px}.sd{width:36px;padding:6px 0;border-radius:9px;text-align:center;background:var(--off);cursor:pointer;display:flex;flex-direction:column;align-items:center;font-size:.72rem;border:1.5px solid transparent;min-height:70px}.sd small{min-height:14px;opacity:.75}.sd b{font-size:.95rem}.sd i{font-style:normal;font-weight:800;font-size:.7rem}
+.sd.s-office{background:var(--office)}.sd.s-half{background:var(--half)}.sd.s-full{background:var(--full)}.sd.exam{background:var(--accent);color:var(--onacc)}.sd.sel{border-color:var(--ink)}.sd.today{box-shadow:inset 0 -3px 0 var(--accent)}
+.wnav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.wk .day{min-height:150px}
+.shp h2{font-size:1.6rem}.shh{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}.shs{margin:10px 0}
+@media print{body.pr-share>*:not(dialog){display:none!important}body.pr-share dialog{position:static;max-height:none;box-shadow:none;border:0;max-width:none;width:100%}.noprint{display:none!important}}
+@media print{.acts,.tabs,#toast,button{display:none!important}body{background:#fff}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><div class="wrap" id="app">
+<section class="hero"><div class="hl"><div id="prof"></div><span class="eyebrow">Semester 3 · Nation with NaMo GILP</span><h1>Exam &amp; Leave <em>Planner</em></h1><div class="chips2" id="sub"></div>
+<div class="acts"><button class="cta" id="auto">Auto-plan leaves</button><select id="strat" aria-label="Auto-plan strategy"><option value="bal">Balanced</option><option value="hard">Hardest first</option><option value="last">Day before only</option></select>
+<div class="grp"><button id="undo">Undo</button><button id="reset">Reset</button></div><div class="grp"><button id="copy">Copy summary</button><button id="cust">Customise</button></div>
+<div class="grp"><button id="shr">Share</button><button id="ics">Calendar export</button></div><a class="ghost hub" href="https://here-vansh-saxena.github.io/FocusHub-v3/" target="_blank" rel="noopener">Open Focus Hub ↗</a><span class="dots" id="dots"></span></div></div>
+<div class="ringbox" id="ring"></div></section>
+<div id="dash" class="wcol"><div class="stats" id="stats" data-w="stats"></div><div id="alert" style="order:-1"></div>
+<div class="card" data-w="budget"><b>Leave budget</b> <span class="mute" id="bt"></span><div class="meter" id="meter"></div></div>
+<div class="strip" id="strip" data-w="strip"></div></div><div class="tabs" id="tabs"></div><div id="view"></div>
+</div>
+<dialog id="dlg"></dialog><div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),DN=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],KEY="sem3planner.v3";
+const pd=s=>new Date(s+"T00:00:00"),iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const addD=(d,n)=>iso(new Date(pd(d).getTime()+n*864e5+36e5)),diff=(a,b)=>Math.round((pd(a)-pd(b))/864e5);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=(s,o={weekday:"short",day:"numeric",month:"short"})=>pd(s).toLocaleDateString("en-GB",o);
+const TODAY=iso(new Date());
+const ex=(id,name,date,type,kind,target,diff)=>({id,name,date,time:"09:30",type,kind,target,diff});
+const DEF={cap:10,spare:0,strat:"bal",rates:{free:8,half:4,office:2,exam:2},imm:{s:"2026-11-23",e:"2026-12-23"},work:[1,2,3,4,5,6],hrs:{s:"09:30",e:"19:30"},
+theme:"white",accent:"",radius:12,fs:15,dense:false,wk:0,showH:true,sun:true,tab:"cal",ov:{},meta:{},topics:{},sl:[],check:{},commute:45,early:30,fx:true,conf:true,bg:"auto",font:"theme",ch:84,profile:{name:"",college:"",cohort:"",join:"",emoji:"",color:"#5b3fd0"},layout:"month",plans:[],looks:[],dash:{order:[],hide:{}},ins:{order:[],hide:{}},ics:{ex:true,lv:true,al:1440,dur:3},
+exams:[ex("bm","Business Maths","2026-12-08","Core","theory",40,3),ex("fm","Financial Management","2026-12-10","Core","theory",40,3),ex("pm","Principles of Marketing","2026-12-15","Core","theory",30,2),ex("br","Brand Management","2026-12-18","GE","theory",25,2),ex("ha","Art of Being Happy","2026-12-21","SEC","theory",15,1),ex("ev","EVS","2026-12-28","AEC","theory",15,1),
+ex("bmp","Business Maths Practical","","Practical","practical",10,2),ex("fmp","Financial Management Practical","","Practical","practical",10,2)]};
+let S,sel="2026-12-08",H=[],anim=true;
+try{S=Object.assign(structuredClone(DEF),JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){S=structuredClone(DEF)}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+if(!S.mig6){const p=S.profile;if(p&&p.name==="Vanshie"&&/^Shri Ram College/.test(p.college)&&p.cohort==="DU"&&!p.join&&!p.emoji)S.profile=structuredClone(DEF.profile);S.mig6=true;save()}
+const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2300)};
+const boom=()=>{if(!S.conf)return;const cs=["#5b3fd0","#f6b8b8","#fbe3a6","#cfe3f5","#1f7a4d"];for(let i=0;i<36;i++){const e=document.createElement("i");e.className="cf";e.style.cssText=`left:${Math.random()*100}vw;background:${cs[i%5]};--dx:${Math.random()*160-80}px;animation-delay:${Math.random()*.4}s`;document.body.appendChild(e);setTimeout(()=>e.remove(),3000)}};
+const snap=()=>{H.push(JSON.stringify(S.ov));if(H.length>50)H.shift()};
+const dated=()=>S.exams.filter(e=>e.date).sort((a,b)=>a.date.localeCompare(b.date));
+const exOn=d=>S.exams.filter(e=>e.date===d);
+const reserved=()=>S.exams.filter(e=>e.kind==="practical"&&!e.date).length;
+const def=d=>(d>=S.imm.s&&d<=S.imm.e&&S.work.includes(pd(d).getDay()))?"office":"off";
+const st=d=>S.ov[d]||def(d),cost=s=>s==="half"?.5:s==="full"?1:0;
+const used=()=>Object.keys(S.ov).reduce((a,d)=>a+(def(d)==="office"?cost(S.ov[d]):0),0);
+const hrs=d=>exOn(d).length?S.rates.exam:({office:S.rates.office,half:S.rates.half}[st(d)]??S.rates.free);
+const clash=d=>exOn(d).length&&def(d)==="office"&&st(d)==="office";
+const clashes=()=>[...new Set(dated().filter(e=>clash(e.date)).map(e=>e.date))];
+function win(e){if(!e.date)return[];const p=dated().filter(x=>x.date<e.date&&x.date>TODAY).pop();const out=[];for(let d=p?p.date:TODAY;d<e.date;d=addD(d,1))out.push(d);return out}
+const pct=e=>{const t=S.topics[e.id]||[];return t.length?Math.round(100*t.filter(x=>x.d).length/t.length):0};
+const free=w=>w.filter(d=>["off","full"].includes(st(d))).length;
+const leavesIn=w=>w.reduce((a,d)=>a+(def(d)==="office"?cost(S.ov[d]):0),0);
+const studied=e=>Math.round(S.sl.filter(x=>x.id===e.id).reduce((a,x)=>a+x.h,0)*10)/10;
+function look(){const R=document.documentElement;R.dataset.theme=S.theme;S.accent?R.style.setProperty("--accent",S.accent):R.style.removeProperty("--accent");R.style.setProperty("--r",S.radius+"px");R.style.setProperty("--fs",S.fs+"px");R.style.setProperty("--ch",S.ch+"px");const F={modern:["Sora,Georgia,serif",'"DM Sans",system-ui,sans-serif'],classic:['"Bricolage Grotesque",Georgia,serif','"Instrument Sans",system-ui,sans-serif'],serif:["Georgia,serif","Georgia,serif"],mono:["ui-monospace,Menlo,monospace","ui-monospace,Menlo,monospace"]}[S.font];if(F){R.style.setProperty("--fh",F[0]);R.style.setProperty("--fb",F[1])}else{R.style.removeProperty("--fh");R.style.removeProperty("--fb")}const bg=S.bg==="auto"?(S.theme==="white"?"grid":"plain"):S.bg;document.body.style.backgroundImage=bg==="grid"?"linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px)":bg==="dots"?"radial-gradient(var(--grid) 1.6px,transparent 1.6px)":"none";document.body.style.backgroundSize=bg==="dots"?"20px 20px":"28px 28px";document.body.classList.toggle("fx",S.fx);
+ const a=$("#app");a.classList.toggle("dense",S.dense);a.classList.toggle("noh",!S.showH);a.classList.toggle("nosun",!S.sun)}
+function render(){
+ look();$("#prof").innerHTML=profHTML();$("#pf").onclick=prof;const u=used(),rv=reserved(),left=S.cap-u-rv,nx=dated().find(e=>e.date>=TODAY),cl=clashes(),w=nx?win(nx):[];
+ $("#sub").innerHTML=`<span>Office ${S.work.map(i=>DN[i]).join(", ")}</span><span>${S.hrs.s} to ${S.hrs.e}</span><span>Immersion ${fmt(S.imm.s,{day:"numeric",month:"short"})} to ${fmt(S.imm.e,{day:"numeric",month:"short"})}</span>`;
+ $("#strat").value=S.strat;$("#dots").innerHTML=["white","dark","amoled","ocean","sunset","forest","lavender"].map(t=>`<button class="${S.theme===t?"on":""}" data-t="${t}" aria-label="${t} theme" style="background:${{white:"#fff",dark:"#141a2e",amoled:"#000",ocean:"#0284c7",sunset:"#ea580c",forest:"#15803d",lavender:"#7c3aed"}[t]}"></button>`).join("");
+ document.querySelectorAll("#dots button").forEach(b=>b.onclick=()=>{S.theme=b.dataset.t;save();render()});
+ const c=Math.min(1,(u+rv)/S.cap)*213.6;
+ $("#ring").innerHTML=nx?`<div class="rbt"><span>Next exam</span><span class="pill">${fmt(nx.date)}, ${nx.time}</span></div><div class="rbm"><div class="big2 ${diff(nx.date,TODAY)<=3?"u":""}">${diff(nx.date,TODAY)}<small>days</small></div><div class="ring"><svg width="84" height="84"><circle cx="42" cy="42" r="34" fill="none" style="stroke:var(--ringt)" stroke-width="9"/><circle cx="42" cy="42" r="34" fill="none" style="stroke:var(--ringc)" stroke-width="9" stroke-linecap="round" stroke-dasharray="${c} 214"/></svg><b>${left}<small>free</small></b></div></div><div class="nm">${esc(nx.name)}</div><div class="rbf"><span>${left} of ${S.cap} leaves free</span><span>${w.reduce((a,d)=>a+hrs(d),0)}h prep</span></div>`:`<div class="nm">No upcoming exams</div><div class="rbf"><span>${left} of ${S.cap} leaves free</span></div>`;
+ const all=Object.values(S.topics).flat(),tp=all.length?Math.round(100*all.filter(x=>x.d).length/all.length):0;
+ $("#stats").innerHTML=`<div class="stat ${left<0?"bad":""}"><b>${left}</b><span>Leaves left of ${S.cap}<br>${u} used, ${rv} held for practicals</span></div>
+ <div class="stat"><b>${nx?diff(nx.date,TODAY)+"d":"None"}</b><span>Next exam<br>${nx?esc(nx.name):""}</span></div>
+ <div class="stat"><b>${w.reduce((a,d)=>a+hrs(d),0)}h</b><span>Prep hours for next<br>${free(w)} free days</span></div>
+ <div class="stat ${cl.length?"bad":""}"><b>${cl.length}</b><span>Exam on office day</span></div>
+ <div class="stat"><b>${tp}%</b><span>Syllabus<br>${all.filter(x=>x.d).length}/${all.length} topics</span></div>`;
+ $("#alert").innerHTML=cl.length?`<div class="alert"><span><b>Heads up:</b> office starts ${S.hrs.s}, the same time as your exam on ${cl.map(d=>fmt(d)+" ("+esc(exOn(d)[0].name)+")").join(", ")}. Mark at least a half day.</span><button class="pri" id="fix">Fix all with half days</button></div>`:"";
+ if($("#fix"))$("#fix").onclick=()=>{snap();cl.forEach(d=>S.ov[d]="half");save();render();boom()};
+ $("#bt").textContent=left<0?`Over budget by ${-left}`:`${left} remaining, ${rv} held for practicals`;
+ const tk=[...Array(Math.floor(u)).fill("f"),...(u%1?["h"]:[]),...Array(rv).fill("p")];while(tk.length<S.cap)tk.push("");$("#meter").innerHTML=tk.map(k=>`<i class="${k}"></i>`).join("");
+ $("#strip").innerHTML=dated().filter(e=>e.date>=TODAY).map(e=>{const n=diff(e.date,TODAY),q=st(e.date);return `<div class="sc ${n<=3?"urgent":""}"><b>${n===0?"Today":n+"d"}</b>${esc(e.name)}<br><span class="mute">${fmt(e.date)}, ${def(e.date)==="office"?(q==="office"?"office day":q==="half"?"half day":"leave"):"off day"}</span></div>`}).join("");
+ $("#tabs").innerHTML=[["cal","Calendar"],["line","Timeline"],["subj","Subjects & prep"],["ins","Insights"],["cmp","Compare"]].map(([k,n])=>`<button class="${S.tab===k?"on":""}" data-k="${k}">${n}</button>`).join("")+'<button id="tdy" style="margin-left:auto">Today</button>';
+ document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{S.tab=b.dataset.k;save();anim=true;render()});$("#tdy").onclick=()=>{sel=TODAY;S.tab="cal";render()};
+ ({cal:vCal,line:vLine,subj:vSubj,ins:vIns,cmp:vCmp})[S.tab]();applyW("#dash",DASH,S.dash)}
+function vCal(){
+ const ds=[S.imm.s,S.imm.e,TODAY,...dated().map(e=>e.date)].sort(),a=pd(ds[0]),b=pd(ds[ds.length-1]);let h="";
+ const hd=[...Array(7)].map((_,i)=>DN[(i+S.wk)%7]);
+ for(let y=a.getFullYear(),mo=a.getMonth();y<b.getFullYear()||(y===b.getFullYear()&&mo<=b.getMonth());mo++>10&&(mo=0,y++)){
+  const f=new Date(y,mo,1),n=new Date(y,mo+1,0).getDate();
+  h+=`<div class="month"><h3>${f.toLocaleDateString("en-GB",{month:"long",year:"numeric"})}</h3><div class="cal-head">${hd.map(x=>`<div>${x}</div>`).join("")}</div><div class="cal">`+'<div class="day blank"></div>'.repeat((f.getDay()-S.wk+7)%7);
+  for(let d=1;d<=n;d++){const k=iso(new Date(y,mo,d)),e=exOn(k),s=st(k),dw=pd(k).getDay(),inI=k>=S.imm.s&&k<=S.imm.e,m=S.meta[k]||{};
+   h+=`<div class="day s-${s} ${e.length?"exam":""} ${dw===0?"sun":""} ${k===sel?"sel":""} ${k===TODAY?"today":""}" tabindex="0" data-d="${k}" role="button" aria-label="${fmt(k)}"><span class="n">${d}</span>${e.map(x=>`<span class="x">${esc(x.name)}</span>`).join("")}${!e.length&&inI&&def(k)==="office"?`<span>${s==="office"?"Office":s==="half"?"Half day":"Leave"}</span>`:""}${!e.length&&dw===0?"<span>Sunday</span>":""}<span class="h">${hrs(k)}h prep</span>${m.w?'<span class="w">'+esc(m.w.slice(0,6))+"</span>":""}${clash(k)?'<span class="c">!</span>':""}</div>`}
+  h+="</div></div>"}
+ $("#view").innerHTML=`<div class="legend"><span style="--c:var(--office)">Office</span><span style="--c:var(--half)">Half-day leave</span><span style="--c:var(--full)">Full-day leave</span><span style="--c:var(--off)">Off or free</span><span style="--c:var(--accent)">Exam</span><span>Prep hours: free ${S.rates.free}, half ${S.rates.half}, office ${S.rates.office}</span></div>
+ ${layoutBar()}<div class="layout"><div class="card">${body(h)}</div><aside class="side card" id="detail"></aside></div><p class="mute">Click a day for details. Double-click an office day to cycle Office, Half, Full. Shortcuts: arrow keys move, O, H, F set the day, T jumps to today.</p>`;
+ document.querySelectorAll("[data-lay]").forEach(b=>b.onclick=()=>{S.layout=b.dataset.lay;anim=true;save();render()});document.querySelectorAll("[data-wk]").forEach(b=>b.onclick=()=>{sel=addD(sel,+b.dataset.wk);render()});document.querySelectorAll(".day[data-d],.lr[data-d],.sd[data-d]").forEach(el=>{el.onclick=()=>{sel=el.dataset.d;render()};el.ondblclick=()=>cycle(el.dataset.d)});if(anim&&S.fx){const v=$("#view");v.classList.add("enter");setTimeout(()=>v.classList.remove("enter"),700)}anim=false;detail()}
+function setS(d,s){if(def(d)!=="office"){toast("Not an office day, so no leave is needed.");return}snap();if(s==="office")delete S.ov[d];else S.ov[d]=s;save();render()}
+const cycle=d=>setS(d,{office:"half",half:"full",full:"office"}[st(d)]);
+function detail(){
+ const d=sel,e=exOn(d),s=st(d),m=S.meta[d]||{},o=def(d)==="office",dw=pd(d).getDay(),plan=[];
+ e.forEach(x=>plan.push(`${x.time} ${x.kind==="practical"?"Practical":"Exam"}: ${esc(x.name)}`));
+ if(s==="office")plan.push(`${S.hrs.s} to ${S.hrs.e} Office`,`Evening about ${hrs(d)}h revision`);
+ if(s==="half")plan.push("Half day leave, then office",`About ${hrs(d)}h study`);
+ if(s==="full")plan.push("Full day leave",`About ${hrs(d)}h study`);
+ if(s==="off")plan.push(dw===0?"Sunday, no office":"Free day",`About ${hrs(d)}h study`);
+ const bud=[...new Set(Object.values(S.meta).flatMap(x=>(x.w||"").split(",").map(y=>y.trim()).filter(Boolean)))];
+ const nxt=dated().find(x=>x.date>=d);
+ $("#detail").innerHTML=`<h3>${fmt(d,{weekday:"long",day:"numeric",month:"short"})}</h3>
+ <div class="chips"><span class="chip">${o?(s==="office"?"Office":s==="half"?"Half-day leave":"Full-day leave"):"Off"}</span>${e.map(x=>`<span class="chip">${esc(x.type)}</span>`).join("")}${d===TODAY?'<span class="chip">Today</span>':""}${nxt&&nxt.date>d?`<span class="chip">${diff(nxt.date,d)}d to ${esc(nxt.name)}</span>`:""}</div>
+ ${o?`<div class="seg"><button class="${s==="office"?"on":""}" data-s="office">Office</button><button class="${s==="half"?"on":""}" data-s="half">Half (0.5)</button><button class="${s==="full"?"on":""}" data-s="full">Full (1)</button></div>`:'<p class="mute">No office on this day.</p>'}
+ <b>Plan for the day</b><ul class="plan">${plan.map(p=>`<li>${p}</li>`).join("")}${clash(d)?'<li class="warn">Exam clashes with office. Take leave.</li>':e.length&&o?'<li class="ok">Clash handled.</li>':""}</ul>
+ ${e.length?`<div class="leave">Leave home by <b>${leaveBy(e[0].time)}</b> (${S.early} min early, ${S.commute} min travel)</div><b>Exam day checklist</b>${chk(e[0])}`:""}
+ <b>Study log</b><div class="mute">Logged ${S.sl.filter(x=>x.d===d).reduce((a,x)=>a+x.h,0)}h of ${hrs(d)}h planned</div>${S.sl.map((x,i)=>x.d===d?`<div class="topic"><span style="flex:1">${esc((S.exams.find(z=>z.id===x.id)||{}).name)}, ${x.h}h</span><button data-sd="${i}" aria-label="remove">x</button></div>`:"").join("")}
+ <div class="row2"><select id="slx">${S.exams.map(z=>`<option value="${z.id}">${esc(z.name)}</option>`).join("")}</select><input type="number" step=".5" id="slh" placeholder="Hours"><button id="sla">Add</button></div><a class="lnk" href="https://here-vansh-saxena.github.io/FocusHub-v3/" target="_blank" rel="noopener">Study this day in Focus Hub</a>
+ <label class="l" for="w">Going to office with</label><input id="w" value="${esc(m.w)}" placeholder="Names, comma separated"><div class="chips">${bud.map(b=>`<span class="chip bud">${esc(b)}</span>`).join("")}</div>
+ <label class="l" for="nt">Notes</label><textarea id="nt" rows="3" placeholder="Reminders, tasks, deadlines">${esc(m.n)}</textarea>`;
+ document.querySelectorAll(".seg button[data-s]").forEach(b=>b.onclick=()=>setS(d,b.dataset.s));
+ const wr=k=>ev=>{S.meta[d]=Object.assign(S.meta[d]||{},{[k]:ev.target.value});save()};
+ $("#w").onchange=ev=>{wr("w")(ev);vCal()};$("#nt").oninput=wr("n");bindX(d);
+ document.querySelectorAll(".bud").forEach(c=>c.onclick=()=>{const v=$("#w").value.split(",").map(x=>x.trim()).filter(Boolean);if(!v.includes(c.textContent))v.push(c.textContent);S.meta[d]=Object.assign(S.meta[d]||{},{w:v.join(", ")});save();vCal()})}
+const DCK=["Admit card and ID","Stationery and calculator","Water and snacks","Route and transport checked","Formula sheet reviewed"];
+function chk(e){const L=S.check[e.id]=S.check[e.id]||DCK.map(t=>({t,d:false}));return L.map((x,i)=>`<div class="chk"><input type="checkbox" data-ck="${e.id}:${i}" ${x.d?"checked":""}><span>${esc(x.t)}</span></div>`).join("")+`<input id="cka" data-id="${e.id}" placeholder="Add checklist item, press Enter" style="margin:6px 0">`}
+function leaveBy(t){const[h,m]=t.split(":").map(Number);let x=h*60+m-S.early-S.commute;if(x<0)x+=1440;return String(Math.floor(x/60)).padStart(2,"0")+":"+String(x%60).padStart(2,"0")}
+function bindX(d){const D=$("#detail");D.querySelectorAll("[data-ck]").forEach(c=>c.onchange=()=>{const[id,i]=c.dataset.ck.split(":");S.check[id][i].d=c.checked;save()});
+ const ca=$("#cka");if(ca)ca.onkeydown=ev=>{if(ev.key==="Enter"&&ca.value.trim()){S.check[ca.dataset.id].push({t:ca.value.trim(),d:false});save();detail()}};
+ const sa=$("#sla");if(sa)sa.onclick=()=>{const h=+$("#slh").value;if(h>0){S.sl.push({d,id:$("#slx").value,h});save();render()}};
+ D.querySelectorAll("[data-sd]").forEach(b=>b.onclick=()=>{S.sl.splice(b.dataset.sd,1);save();render()})}
+function leaveReq(){const ls=Object.keys(S.ov).sort().filter(d=>def(d)==="office");return `Hi,\n\nI would like to request leave for my semester exams on these dates:\n${ls.map(d=>`${fmt(d,{weekday:"short",day:"numeric",month:"long"})}: ${S.ov[d]==="half"?"half day":"full day"}`).join("\n")||"(none yet)"}\n\nExam dates: ${dated().map(e=>fmt(e.date)+" "+e.name).join(", ")}.\n\nTotal leave: ${used()} days. Thank you.${S.profile.name?"\n"+S.profile.name+(S.profile.college?", "+S.profile.college:""):""}`}
+function slCard(){const lg=d=>S.sl.some(x=>x.d===d);let sk=0;for(let d=TODAY;lg(d);d=addD(d,-1))sk++;const tot=S.sl.reduce((a,x)=>a+x.h,0),wk=S.sl.filter(x=>x.d>addD(TODAY,-7)&&x.d<=TODAY).reduce((a,x)=>a+x.h,0);
+ return `<div class="card" data-w="log"><h3>Study log and leave request</h3><div class="mini"><span><b>${tot}h</b> logged in total</span><span><b>${wk}h</b> in the last 7 days</span><span><b>${sk}</b> day streak</span></div><p class="mute">Log study hours from any day in the calendar. Use the button to copy a ready leave request for your manager.</p><button class="pri" id="lr">Copy leave request</button></div>`}
+const initials=n=>(n||"+").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase();
+function profHTML(){const p=S.profile,g=new Date().getHours(),gr=g<12?"Good morning":g<17?"Good afternoon":"Good evening",j=p.join?diff(TODAY,p.join):null,jt=j===null?"Add joining date":j<0?`Joins in ${-j} days`:`Day ${j+1} of fellowship`;
+ return `<button class="prof" id="pf" aria-label="Edit profile"><span class="av" style="background:${esc(p.color)}">${esc(p.emoji||initials(p.name))}</span><span class="pt"><b>${gr}${p.name?", "+esc(p.name.trim().split(" ")[0]):""}</b><span>${esc(p.college||"Add your college")}</span></span>${p.cohort?`<span class="cohort" data-c="${esc(p.cohort)}">${esc(p.cohort)}</span>`:""}<span class="jd">${jt}</span></button>`}
+function prof(){const D=$("#dlg"),p=S.profile;
+ D.innerHTML=`<h2>Your profile</h2><div class="g2" style="margin-top:10px"><div style="grid-column:1/-1"><label class="l">Name</label><input id="pn" value="${esc(p.name)}" placeholder="Your name"></div>
+ <div style="grid-column:1/-1"><label class="l">College</label><input id="pc" list="cl" value="${esc(p.college)}" placeholder="Your college"><datalist id="cl"><option value="Shri Ram College of Commerce (SRCC)"><option value="Hindu College"><option value="Lady Shri Ram College (LSR)"><option value="Hansraj College"><option value="Miranda House"><option value="Kirori Mal College"></datalist></div>
+ <div><label class="l">Cohort</label><select id="pch"><option value="">Select cohort</option>${["DU","Engineering","Law"].map(c=>`<option ${p.cohort===c?"selected":""}>${c}</option>`).join("")}</select></div>
+ <div><label class="l">Fellowship joining date</label><input type="date" id="pj" value="${esc(p.join)}"></div>
+ <div><label class="l">Avatar emoji (optional)</label><input id="pe" maxlength="2" value="${esc(p.emoji)}" placeholder="Initials if empty"></div>
+ <div><label class="l">Avatar colour</label><input type="color" id="pcol" value="${esc(p.color)}" style="padding:2px;height:38px"></div></div>
+ <div class="seg"><button class="pri" id="psv">Save profile</button><button id="pcx">Cancel</button></div>`;
+ $("#psv").onclick=()=>{S.profile={name:$("#pn").value.trim(),college:$("#pc").value.trim(),cohort:$("#pch").value,join:$("#pj").value,emoji:$("#pe").value.trim(),color:$("#pcol").value};save();render();D.close();toast("Profile saved")};
+ $("#pcx").onclick=()=>D.close();D.showModal()}
+const DASH=[["stats","Stats row"],["budget","Leave budget"],["strip","Upcoming exams strip"]],INSW=[["tiles","Summary tiles"],["heat","Prep hours heatmap"],["bars","Hours vs target"],["sug","Smart suggestions"],["log","Study log and leave request"]];
+const LK=["theme","accent","radius","fs","dense","font","bg","ch","fx","conf","showH","sun","wk","layout"];
+function applyW(root,list,cfg){const el=$(root);if(!el)return;const ord=cfg.order&&cfg.order.length?cfg.order:list.map(x=>x[0]);list.forEach(([id])=>{const n=el.querySelector(`:scope>[data-w="${id}"]`);if(!n)return;const i=ord.indexOf(id);n.style.order=i<0?99:i;n.style.display=cfg.hide&&cfg.hide[id]?"none":""})}
+function wUI(title,key,list){const c=S[key],ord=c.order&&c.order.length?c.order:list.map(x=>x[0]);return `<label class="l">${title}</label>`+ord.map((id,i)=>`<div class="sug"><label class="chk"><input type="checkbox" data-wv="${key}:${id}" ${c.hide&&c.hide[id]?"":"checked"}>${(list.find(x=>x[0]===id)||[0,id])[1]}</label><span><button data-wm="${key}:${i}:-1" aria-label="Move up">Up</button> <button data-wm="${key}:${i}:1" aria-label="Move down">Down</button></span></div>`).join("")}
+function lookUI(){return `<label class="l">Saved looks</label><div class="row2" style="grid-template-columns:1fr auto"><input id="lkn" placeholder="Name this look"><button id="lks">Save current look</button></div>`+S.looks.map((k,i)=>`<div class="sug"><span>${esc(k.name)}</span><span><button data-la="${i}">Apply</button> <button data-ld="${i}">Delete</button></span></div>`).join("")}
+function dcell(k){const e=exOn(k),s=st(k),dw=pd(k).getDay(),inI=k>=S.imm.s&&k<=S.imm.e,m=S.meta[k]||{};return `<div class="day s-${s} ${e.length?"exam":""} ${dw===0?"sun":""} ${k===sel?"sel":""} ${k===TODAY?"today":""}" tabindex="0" data-d="${k}" role="button" aria-label="${fmt(k)}"><span class="n">${pd(k).getDate()}</span>${e.map(x=>`<span class="x">${esc(x.name)}</span>`).join("")}${!e.length&&inI&&def(k)==="office"?`<span>${s==="office"?"Office":s==="half"?"Half day":"Leave"}</span>`:""}${!e.length&&dw===0?"<span>Sunday</span>":""}<span class="h">${hrs(k)}h prep</span>${m.w?'<span class="w">'+esc(m.w.slice(0,6))+"</span>":""}${clash(k)?'<span class="c">!</span>':""}</div>`}
+function rng(){const ds=[S.imm.s,TODAY,...dated().map(e=>e.date)].sort(),o=[];for(let d=ds[0];d<=ds[ds.length-1]&&o.length<150;d=addD(d,1))o.push(d);return o}
+function layoutBar(){return `<div class="seg" style="max-width:440px">${[["month","Month"],["week","Week"],["list","List"],["strip","Strip"]].map(([k,n])=>`<button data-lay="${k}" class="${S.layout===k?"on":""}">${n}</button>`).join("")}</div>`}
+function body(h){
+ if(S.layout==="list")return rng().map(d=>{const e=exOn(d),s=st(d),o=def(d)==="office";return `<div class="lr s-${s} ${e.length?"exam":""} ${d===sel?"sel":""} ${d===TODAY?"today":""}" data-d="${d}" tabindex="0"><span><b>${pd(d).getDate()}</b> ${fmt(d,{weekday:"short",month:"short"})}</span><span>${e.length?e.map(x=>esc(x.name)).join(", "):o?(s==="office"?"Office":s==="half"?"Half-day leave":"Full-day leave"):pd(d).getDay()===0?"Sunday":"Off"}</span><span>${hrs(d)}h prep</span></div>`}).join("");
+ if(S.layout==="week"){const a=addD(sel,-((pd(sel).getDay()-S.wk+7)%7)),hd=[...Array(7)].map((_,i)=>DN[(i+S.wk)%7]);return `<div class="wnav"><button data-wk="-7">Previous week</button><b>${fmt(a)} to ${fmt(addD(a,6))}</b><button data-wk="7">Next week</button></div><div class="cal-head">${hd.map(x=>`<div>${x}</div>`).join("")}</div><div class="cal wk">${[...Array(7)].map((_,i)=>dcell(addD(a,i))).join("")}</div>`}
+ if(S.layout==="strip")return `<div class="scroll"><div class="sdrow">${rng().map(d=>`<div class="sd s-${st(d)} ${exOn(d).length?"exam":""} ${d===sel?"sel":""} ${d===TODAY?"today":""}" data-d="${d}" title="${fmt(d)}"><small>${pd(d).getDate()===1?fmt(d,{month:"short"}):""}</small><span>${DN[pd(d).getDay()][0]}</span><b>${pd(d).getDate()}</b>${exOn(d).length?"<i>E</i>":""}</div>`).join("")}</div></div><p class="mute">Compact view of every day. Click a day to open it in the panel.</p>`;
+ return h}
+function withOv(ov,fn){const o=S.ov;S.ov=ov;try{return fn()}finally{S.ov=o}}
+function metrics(ov){return withOv(ov,()=>{const l=dated().filter(e=>e.date>=TODAY),end=l.length?l[l.length-1].date:TODAY;let hr=0;for(let d=TODAY;d<=end;d=addD(d,1))hr+=hrs(d);
+ const th=l.filter(e=>e.kind==="theory").map(e=>({e,h:win(e).reduce((a,d)=>a+hrs(d),0)})),ds=Object.keys(ov).filter(d=>def(d)==="office");
+ return {used:used(),full:ds.filter(d=>ov[d]==="full").length,half:ds.filter(d=>ov[d]==="half").length,free:S.cap-used()-reserved(),hr,cl:clashes().length,short:th.filter(x=>x.h<x.e.target).length,th}})}
+function buildOv(strat,spare){const ov={};let left=S.cap-reserved()-spare;const dd=dated().filter(e=>def(e.date)==="office");dd.forEach(e=>{const c=e.kind==="practical"?"full":"half";ov[e.date]=c;left-=cost(c)});
+ let th=dated().filter(e=>e.kind==="theory"&&e.date>TODAY);if(strat==="hard")th.sort((a,b)=>b.diff-a.diff||a.date.localeCompare(b.date));
+ for(let k=1;k<=(strat==="last"?1:7);k++)th.forEach(e=>{const d=addD(e.date,-k);if(left>=1&&d>=TODAY&&def(d)==="office"&&!exOn(d).length&&!ov[d]){ov[d]="full";left--}});return ov}
+function vCmp(){const cols=[{n:"Current plan",ov:S.ov},...S.plans.map(p=>({n:p.name,ov:p.ov,id:p.id}))],M=cols.map(c=>metrics(c.ov)),full=S.plans.length>=3;
+ const bst=(k,min)=>{const v=M.map(m=>m[k]);return min?Math.min(...v):Math.max(...v)};
+ const row=(lab,k,min,suf="")=>`<tr><th>${lab}</th>${M.map(m=>`<td class="${min!==null&&M.length>1&&m[k]===bst(k,min)?"bestc":""}">${m[k]}${suf}</td>`).join("")}</tr>`;
+ const subj=dated().filter(e=>e.kind==="theory"&&e.date>=TODAY).map(e=>`<tr><th>${esc(e.name)} (target ${e.target}h)</th>${M.map(m=>{const x=m.th.find(t=>t.e.id===e.id);return `<td class="${x&&x.h<e.target?"warn":""}">${x?x.h+"h":"-"}</td>`}).join("")}</tr>`).join("");
+ $("#view").innerHTML=`<div class="card"><h3>Compare leave plans</h3><p class="mute">Save up to 3 plans, then compare leaves, prep hours and clashes side by side. Load any plan into the calendar with one click.</p><div class="row2" style="grid-template-columns:1fr auto"><input id="pnm" placeholder="Name for the current plan, e.g. Max prep"><button class="pri" id="psave" ${full?"disabled":""}>Save current plan</button></div>
+ <div class="bar2" style="margin-top:10px"><button data-pre="hard:0:Max prep" ${full?"disabled":""}>Add Max prep</button><button data-pre="bal:2:Keep spare" ${full?"disabled":""}>Add Keep spare</button><button data-pre="last:1:Day before only" ${full?"disabled":""}>Add Day before only</button></div></div>
+ <div class="card"><div class="scroll"><table><thead><tr><th></th>${cols.map(c=>`<th>${esc(c.n)}${c.id?`<br><button data-pl="${c.id}">Load</button> <button data-pd="${c.id}">Delete</button>`:""}</th>`).join("")}</tr></thead><tbody>${row("Leaves used","used",true)}${row("Full days","full",null)}${row("Half days","half",null)}${row("Leaves free","free",false)}${row("Total prep hours","hr",false,"h")}${row("Exam and office clashes","cl",true)}${row("Subjects short on prep","short",true)}${subj}</tbody></table></div><p class="mute">Green marks the best value in each row. Practical leaves held for unannounced dates are counted in Leaves free.</p></div>`;
+ $("#psave").onclick=()=>{S.plans.push({id:"p"+Date.now(),name:$("#pnm").value.trim()||"Plan "+(S.plans.length+1),ov:structuredClone(S.ov)});save();render();toast("Plan saved")};
+ document.querySelectorAll("[data-pre]").forEach(b=>b.onclick=()=>{const[st_,sp,n]=b.dataset.pre.split(":");S.plans.push({id:"p"+Date.now(),name:n,ov:buildOv(st_,+sp)});save();render()});
+ document.querySelectorAll("[data-pl]").forEach(b=>b.onclick=()=>{const p=S.plans.find(x=>x.id===b.dataset.pl);snap();S.ov=structuredClone(p.ov);save();S.tab="cal";render();toast("Loaded "+p.name)});
+ document.querySelectorAll("[data-pd]").forEach(b=>b.onclick=()=>{S.plans=S.plans.filter(x=>x.id!==b.dataset.pd);save();render()})}
+const pad2=n=>String(n).padStart(2,"0"),dtx=(d,t)=>d.replace(/-/g,"")+"T"+t.replace(":","")+"00";
+const endT=(t,h)=>{const[a,b]=t.split(":").map(Number),x=a*60+b+Math.round(h*60);return pad2(Math.floor(x/60)%24)+":"+pad2(x%60)};
+function icsText(o){const L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Semester 3 Planner//EN","CALSCALE:GREGORIAN"],stamp=new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z",q=t=>String(t).replace(/([,;\\])/g,"\\$1");
+ const ev=(uid,sum,a,b,all)=>{L.push("BEGIN:VEVENT","UID:"+uid+"@sem3planner","DTSTAMP:"+stamp,"SUMMARY:"+q(sum));if(all)L.push("DTSTART;VALUE=DATE:"+a.replace(/-/g,""),"DTEND;VALUE=DATE:"+addD(a,1).replace(/-/g,""));else L.push("DTSTART:"+a,"DTEND:"+b);if(o.al>0&&!all)L.push("BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:Reminder","TRIGGER:-PT"+o.al+"M","END:VALARM");L.push("END:VEVENT")};
+ if(o.ex)dated().forEach(e=>ev("ex"+e.id,(e.kind==="practical"?"Practical: ":"Exam: ")+e.name,dtx(e.date,e.time),dtx(e.date,endT(e.time,o.dur))));
+ if(o.lv)Object.keys(S.ov).sort().filter(d=>def(d)==="office").forEach(d=>ev("lv"+d,"Exam leave ("+(S.ov[d]==="half"?"half day":"full day")+")",d,d,true));
+ L.push("END:VCALENDAR");return L.join("\r\n")}
+function icsDlg(){const D=$("#dlg"),o=S.ics;
+ D.innerHTML=`<h2>Calendar export</h2><p class="mute">Your browser sandbox blocks file downloads. Copy the text below, paste it into a new text file, save it as planner.ics, then import it into Google Calendar or Apple Calendar.</p>
+ <div class="sw"><input type="checkbox" id="ix" ${o.ex?"checked":""}><label for="ix">Exams and practicals</label></div><div class="sw"><input type="checkbox" id="il" ${o.lv?"checked":""}><label for="il">Leave days</label></div>
+ <div class="sw"><label>Reminder</label><select id="ia" style="width:auto">${[[0,"None"],[60,"1 hour before"],[180,"3 hours before"],[1440,"1 day before"],[2880,"2 days before"]].map(([v,n])=>`<option value="${v}" ${o.al===v?"selected":""}>${n}</option>`).join("")}</select></div>
+ <div class="sw"><label>Exam length (hours)</label><input type="number" id="idu" step=".5" value="${o.dur}" style="width:80px"></div>
+ <textarea id="icsout" rows="8" readonly></textarea><div class="seg"><button class="pri" id="icc">Copy calendar text</button><button id="icx">Close</button></div>
+ <b>Quick add to Google Calendar</b><div id="gl"></div>`;
+ const up=()=>{$("#icsout").value=icsText(o);$("#gl").innerHTML=dated().map(e=>`<a class="lnk" style="display:block;margin:4px 0" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent((e.kind==="practical"?"Practical: ":"Exam: ")+e.name)}&dates=${dtx(e.date,e.time)}/${dtx(e.date,endT(e.time,o.dur))}">${fmt(e.date)}: ${esc(e.name)}</a>`).join("")};
+ $("#ix").onchange=e=>{o.ex=e.target.checked;save();up()};$("#il").onchange=e=>{o.lv=e.target.checked;save();up()};$("#ia").onchange=e=>{o.al=+e.target.value;save();up()};$("#idu").onchange=e=>{o.dur=+e.target.value||3;save();up()};
+ $("#icc").onclick=()=>navigator.clipboard.writeText($("#icsout").value).then(()=>toast("Calendar text copied"),()=>{$("#icsout").select();toast("Press Ctrl+C to copy")});
+ $("#icx").onclick=()=>D.close();up();D.showModal()}
+function asState(snap,fn){const o=S;S=Object.assign(structuredClone(DEF),snap);try{return fn()}finally{S=o}}
+function shareCode(){return btoa(unescape(encodeURIComponent(JSON.stringify({profile:S.profile,exams:S.exams,ov:S.ov,cap:S.cap,imm:S.imm,work:S.work,hrs:S.hrs,rates:S.rates}))))}
+function shareHTML(){const p=S.profile,u=used(),rv=reserved(),j=p.join?diff(TODAY,p.join):null,lv=Object.keys(S.ov).sort().filter(d=>def(d)==="office");
+ const meta=[p.college,p.cohort,j!==null&&j>=0?"Day "+(j+1)+" of fellowship":""].filter(Boolean).map(esc).join(", ");
+ return `<div class="shp"><div class="shh"><div><h2>${esc(p.name||"Semester 3 plan")}</h2><div class="mute">${meta}</div></div><div class="mute">Updated ${fmt(TODAY,{day:"numeric",month:"long",year:"numeric"})}</div></div>
+ <div class="g2 shs"><div class="stat"><b>${u}</b><span>Leave days used of ${S.cap}</span></div><div class="stat"><b>${rv}</b><span>Held for practicals</span></div><div class="stat"><b>${S.cap-u-rv}</b><span>Still free</span></div><div class="stat"><b>${clashes().length}</b><span>Exam and office clashes</span></div></div>
+ <h3>Exam schedule</h3><div class="scroll"><table><thead><tr><th>Date</th><th>Subject</th><th>Time</th><th>That day</th><th>Prep before</th></tr></thead><tbody>${dated().map(e=>{const s=st(e.date),o=def(e.date)==="office";return `<tr><td>${fmt(e.date)}</td><td><b>${esc(e.name)}</b><br><span class="mute">${esc(e.type)}</span></td><td>${e.time}</td><td>${o?(s==="office"?"Office day":s==="half"?"Half-day leave":"Full-day leave"):"Off day"}</td><td>${e.date>=TODAY?win(e).reduce((a,d)=>a+hrs(d),0)+"h":"Done"}</td></tr>`}).join("")}${S.exams.filter(e=>!e.date).map(e=>`<tr><td>TBA</td><td><b>${esc(e.name)}</b></td><td colspan="3" class="mute">Date to be announced, 1 leave held</td></tr>`).join("")}</tbody></table></div>
+ <h3 style="margin-top:14px">Leave dates</h3><div class="chips">${lv.map(d=>`<span class="chip">${fmt(d)}: ${S.ov[d]==="half"?"half day":"full day"}</span>`).join("")||'<span class="mute">None planned yet</span>'}</div>
+ <p class="mute">Office days: ${S.work.map(i=>DN[i]).join(", ")}, ${S.hrs.s} to ${S.hrs.e}.</p></div>`}
+function share(){const D=$("#dlg");
+ D.innerHTML=`<div class="bar2 noprint"><button class="pri" id="sc1">Copy text summary</button><button id="sc2">Copy share code</button><button id="sc3">Print or save as PDF</button><button id="sc4">Open a shared plan</button><button id="scx">Close</button></div><div id="shb">${shareHTML()}</div>`;
+ const cp=(t,m)=>navigator.clipboard.writeText(t).then(()=>toast(m),()=>toast("Copy blocked by the browser."));
+ $("#sc1").onclick=()=>cp(summary(),"Summary copied");$("#sc2").onclick=()=>cp(shareCode(),"Share code copied. Send it with the planner link.");
+ $("#sc3").onclick=()=>{document.body.classList.add("pr-share");print();setTimeout(()=>document.body.classList.remove("pr-share"),800)};
+ $("#sc4").onclick=()=>{$("#shb").innerHTML='<h3>Open a shared plan</h3><p class="mute">Paste a share code someone sent you to see their plan in read-only view.</p><textarea id="scin" rows="4" placeholder="Paste share code"></textarea><button class="pri" id="sco" style="margin-top:8px">Open</button>';
+  $("#sco").onclick=()=>{try{const snap=JSON.parse(decodeURIComponent(escape(atob($("#scin").value.trim()))));$("#shb").innerHTML='<div class="alert">Read-only shared plan</div>'+asState(snap,shareHTML)}catch(e){toast("That share code is not valid.")}}};
+ $("#scx").onclick=()=>D.close();D.showModal()}
+function vLine(){
+ const l=dated().filter(e=>e.date>=TODAY);if(!l.length){$("#view").innerHTML='<div class="card">No upcoming exams. Add dates in Subjects & prep.</div>';return}
+ const end=l[l.length-1].date,days=[];for(let d=TODAY;d<=end&&days.length<90;d=addD(d,1))days.push(d);
+ $("#view").innerHTML=`<div class="card"><h3>Prep timeline</h3><p class="mute">Shaded days are each subject's prep window. A red underline marks a leave day. Dark squares are exam days.</p><div class="scroll"><div class="gantt">
+ <div class="gr"><span class="gl"></span>${days.map(d=>`<span class="gc ${pd(d).getDay()===0?"sn":""}">${pd(d).getDate()}</span>`).join("")}</div>
+ ${l.map(e=>{const w=win(e);return `<div class="gr"><span class="gl" title="${esc(e.name)}">${esc(e.name)}</span>${days.map(d=>`<span class="gc ${d===e.date?"x":w.includes(d)?"p":""} ${S.ov[d]&&def(d)==="office"?"l":""} ${pd(d).getDay()===0?"sn":""}" title="${fmt(d)}">${d===e.date?"E":""}</span>`).join("")}</div>`}).join("")}</div></div></div>`}
+function vSubj(){
+ const ts=dated().filter(e=>e.date>=TODAY);
+ $("#view").innerHTML=`<div class="card"><h3>Subjects & prep settings</h3>
+ <div class="g2" style="margin-top:10px"><div><label class="l">Leave cap</label><input type="number" step=".5" data-f="cap" value="${S.cap}"></div><div><label class="l">Auto-plan keeps spare</label><input type="number" step=".5" data-f="spare" value="${S.spare}"></div>
+ ${["free","half","office","exam"].map(k=>`<div><label class="l">Prep hours, ${k} day</label><input type="number" data-f="rates.${k}" value="${S.rates[k]}"></div>`).join("")}
+ <div><label class="l">Travel to exam centre (min)</label><input type="number" data-f="commute" value="${S.commute}"></div><div><label class="l">Reach centre early (min)</label><input type="number" data-f="early" value="${S.early}"></div><div><label class="l">Immersion starts</label><input type="date" data-f="imm.s" value="${S.imm.s}"></div><div><label class="l">Immersion ends</label><input type="date" data-f="imm.e" value="${S.imm.e}"></div>
+ <div><label class="l">Office starts</label><input type="time" data-f="hrs.s" value="${S.hrs.s}"></div><div><label class="l">Office ends</label><input type="time" data-f="hrs.e" value="${S.hrs.e}"></div></div>
+ <label class="l">Working days in immersion</label><div class="wd">${DN.map((n,i)=>`<label><input type="checkbox" data-wd="${i}" ${S.work.includes(i)?"checked":""}>${n}</label>`).join("")}</div></div>
+ <div class="g3">${S.exams.map((e,i)=>{const w=win(e),h=w.reduce((a,d)=>a+hrs(d),0),t=S.topics[e.id]||[];return `<div class="subj"><input data-e="${i}" data-f="name" value="${esc(e.name)}" aria-label="Subject name" style="font-weight:700">
+ <div class="row"><input type="date" data-e="${i}" data-f="date" value="${e.date}" aria-label="Exam date"><input type="time" data-e="${i}" data-f="time" value="${e.time}" aria-label="Exam time"><input data-e="${i}" data-f="type" value="${esc(e.type)}" aria-label="Type">
+ <select data-e="${i}" data-f="kind" aria-label="Kind"><option value="theory" ${e.kind==="theory"?"selected":""}>Theory</option><option value="practical" ${e.kind==="practical"?"selected":""}>Practical</option></select>
+ <input type="number" data-e="${i}" data-f="target" value="${e.target}" aria-label="Target hours" title="Target prep hours"><select data-e="${i}" data-f="diff" aria-label="Difficulty">${[1,2,3].map(n=>`<option value="${n}" ${+e.diff===n?"selected":""}>${["","Easy","Medium","Hard"][n]}</option>`).join("")}</select></div>
+ <div class="mini">${e.date?`<span><b>${diff(e.date,TODAY)}</b> days left</span><span><b>${free(w)}</b> free days</span><span><b>${leavesIn(w)}</b> leaves</span><span><b>${h}h</b> available of ${e.target}h</span>`:'<span class="warn">Date not announced. 1 leave is held for this.</span>'}<span><b>${studied(e)}h</b> studied of ${e.target}h</span></div>
+ <div class="pbar"><i style="width:${pct(e)}%"></i></div><div class="mini">Syllabus ${pct(e)}%</div>
+ ${t.map((x,j)=>`<div class="topic ${x.d?"d":""}"><input type="checkbox" data-te="${e.id}" data-j="${j}" ${x.d?"checked":""} aria-label="done"><span style="flex:1">${esc(x.t)}</span><button data-del="${e.id}:${j}" aria-label="delete topic">x</button></div>`).join("")}
+ <input data-add="${e.id}" placeholder="Add a topic, press Enter" style="margin-top:6px"><button data-rm="${i}" style="margin-top:8px">Remove subject</button></div>`}).join("")}</div>
+ <button class="pri" id="ae">Add subject</button>
+ <div class="card" style="margin-top:14px"><h3>Prep plan by subject</h3><div class="scroll"><table><thead><tr><th>Subject</th><th>Exam</th><th>Days left</th><th>Prep days</th><th>Free days</th><th>Leaves</th><th>Prep hours</th><th>Status</th><th>Syllabus</th></tr></thead><tbody>${dated().map(e=>{const w=win(e),past=e.date<TODAY,h=w.reduce((a,d)=>a+hrs(d),0);return `<tr><td><b>${esc(e.name)}</b><br><span class="mute">${esc(e.type)}</span></td><td>${fmt(e.date)}<br><span class="mute">${e.time}</span></td><td>${past?'<span class="tag">Done</span>':diff(e.date,TODAY)}</td><td>${past?"-":w.length}</td><td>${past?"-":free(w)}</td><td>${leavesIn(w)+(def(e.date)==="office"?cost(S.ov[e.date]):0)}</td><td>${past?"-":h+"h"}</td><td>${past?"":`<span class="tag ${h>=e.target?"g":"t"}">${h>=e.target?"On track":"Short "+(e.target-h)+"h"}</span>`}</td><td><div class="pbar"><i style="width:${pct(e)}%"></i></div>${pct(e)}%</td></tr>`}).join("")}${S.exams.filter(e=>!e.date).map(e=>`<tr><td><b>${esc(e.name)}</b></td><td colspan="8" class="warn">Date to be announced. 1 leave held.</td></tr>`).join("")}</tbody></table></div></div>`;
+ const V=$("#view");
+ V.querySelectorAll("[data-f]").forEach(x=>x.onchange=()=>{const o=x.dataset.e!==undefined?S.exams[x.dataset.e]:S,p=x.dataset.f.split(".");let t=o;while(p.length>1)t=t[p.shift()];t[p[0]]=x.type==="number"?+x.value:x.value;save();render()});
+ V.querySelectorAll("[data-wd]").forEach(x=>x.onchange=()=>{S.work=[...V.querySelectorAll("[data-wd]:checked")].map(c=>+c.dataset.wd);save();render()});
+ V.querySelectorAll("[data-te]").forEach(c=>c.onchange=()=>{const t=S.topics[c.dataset.te];t[c.dataset.j].d=c.checked;save();render();if(c.checked&&t.every(x=>x.d)){boom();toast("Syllabus complete for this subject!")}});
+ V.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{const[id,j]=b.dataset.del.split(":");S.topics[id].splice(j,1);save();render()});
+ V.querySelectorAll("[data-add]").forEach(i=>i.onkeydown=ev=>{if(ev.key==="Enter"&&i.value.trim()){const id=i.dataset.add;(S.topics[id]=S.topics[id]||[]).push({t:i.value.trim(),d:false});save();render()}});
+ V.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{S.exams.splice(b.dataset.rm,1);save();render()});
+ $("#ae").onclick=()=>{S.exams.push(ex("n"+Date.now(),"New subject","","Core","theory",20,2));save();render()}}
+function suggest(){const out=[];dated().filter(e=>e.kind==="theory"&&e.date>TODAY).forEach(e=>{const w=win(e),h=w.reduce((a,d)=>a+hrs(d),0),def_=e.target-h;if(def_>0)w.filter(d=>st(d)==="office"&&!exOn(d).length).reverse().slice(0,2).forEach(d=>out.push({d,e,def_,gain:S.rates.free-S.rates.office}))});return out.sort((a,b)=>b.def_-a.def_).slice(0,5)}
+function vIns(){
+ const l=dated().filter(e=>e.date>=TODAY),end=l.length?l[l.length-1].date:TODAY,days=[];for(let d=TODAY;d<=end&&days.length<90;d=addD(d,1))days.push(d);
+ const tot=days.reduce((a,d)=>a+hrs(d),0),od=days.filter(d=>st(d)==="office").length,fd=days.filter(d=>["off","full"].includes(st(d))).length,sg=suggest();
+ let best=0,run=0;days.forEach(d=>{if(["off","full"].includes(st(d))){run++;best=Math.max(best,run)}else run=0});
+ const hs=S.exams.filter(e=>e.kind==="theory"&&e.date>=TODAY).map(e=>({e,h:win(e).reduce((a,d)=>a+hrs(d),0)}));
+ $("#view").innerHTML=`<div id="insw" class="wcol"><div class="stats" data-w="tiles"><div class="stat"><b>${tot}h</b><span>Total prep hours ahead</span></div><div class="stat"><b>${fd}</b><span>Free study days</span></div><div class="stat"><b>${od}</b><span>Office days left</span></div><div class="stat"><b>${best}</b><span>Longest free stretch (days)</span></div></div>
+ <div class="card" data-w="heat"><h3>Prep hours by day</h3><div class="heat" style="margin-top:10px">${days.map(d=>`<div style="--p:${Math.min(80,hrs(d)*10)}%" title="${fmt(d)}">${pd(d).getDate()}<br>${hrs(d)}h</div>`).join("")}</div></div>
+ <div class="card bars" data-w="bars"><h3>Hours available vs target</h3>${hs.map(({e,h})=>`<div class="br"><span>${esc(e.name)}</span><div class="tr"><i style="width:${Math.min(100,100*h/e.target)}%;${h<e.target?"background:var(--warn)":""}"></i></div><span>${h}h / ${e.target}h</span></div>`).join("")||'<span class="mute">No upcoming theory exams.</span>'}</div>
+ <div class="card" data-w="sug"><h3>Smart leave suggestions</h3><p class="mute">Office days that would add the most study time for subjects that are short on hours.</p>${sg.map((x,i)=>`<div class="sug"><span>Take <b>${fmt(x.d)}</b> off for ${esc(x.e.name)} (+${x.gain}h, short by ${x.def_}h)</span><button data-a="${i}">Apply full leave</button></div>`).join("")||'<span class="ok">Every subject has enough prep time.</span>'}</div>${slCard()}</div>`;
+ document.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>setS(sg[b.dataset.a].d,"full"));$("#lr").onclick=()=>navigator.clipboard.writeText(leaveReq()).then(()=>toast("Leave request copied"),()=>toast("Copy blocked by the browser."));applyW("#insw",INSW,S.ins)}
+function auto(){snap();S.ov={};let left=S.cap-reserved()-S.spare;const ds=dated().filter(e=>def(e.date)==="office");
+ ds.forEach(e=>{const c=e.kind==="practical"?"full":"half";S.ov[e.date]=c;left-=cost(c)});
+ let th=dated().filter(e=>e.kind==="theory"&&e.date>TODAY);if(S.strat==="hard")th.sort((a,b)=>b.diff-a.diff||a.date.localeCompare(b.date));
+ for(let k=1;k<=(S.strat==="last"?1:7);k++)th.forEach(e=>{const d=addD(e.date,-k);if(left>=1&&d>=TODAY&&def(d)==="office"&&!exOn(d).length&&!S.ov[d]){S.ov[d]="full";left--}});
+ save();render();toast(`Auto-planned. ${S.cap-used()-reserved()} leaves free.`);if(!clashes().length)boom()}
+function cust(){const D=$("#dlg");
+ D.innerHTML=`<h2>Customise</h2><label class="l">Theme</label><div class="themes">${[["white","#f5f7f3","Paper (classic)"],["dark","#141a2e","Midnight"],["amoled","#000","AMOLED black"],["ocean","#0284c7","Ocean"],["sunset","#ea580c","Sunset"],["forest","#15803d","Forest"],["lavender","#7c3aed","Lavender"]].map(([k,c,n])=>`<button data-t="${k}" class="${S.theme===k?"on":""}"><i style="background:${c}"></i>${n}</button>`).join("")}</div>
+ <div class="sw"><label>Accent colour</label><input type="color" id="ac" value="${S.accent||"#4f46e5"}" style="width:60px;padding:2px"><button id="ar">Use theme colour</button></div>
+ <div class="sw"><label>Corner roundness</label><input type="range" id="rd" min="4" max="26" value="${S.radius}"></div>
+ <div class="sw"><label>Text size</label><input type="range" id="fs" min="13" max="19" value="${S.fs}"></div>
+ <div class="sw"><label>Font style</label><select id="ft" style="width:auto"><option value="theme">Theme default</option><option value="classic">Classic</option><option value="modern">Modern</option><option value="serif">Serif</option><option value="mono">Mono</option></select></div><div class="sw"><label>Background</label><select id="bgs" style="width:auto"><option value="auto">Auto</option><option value="grid">Graph paper</option><option value="dots">Dots</option><option value="plain">Plain</option></select></div><div class="sw"><label>Day cell height</label><input type="range" id="ch" min="56" max="120" value="${S.ch}"></div><div class="sw"><input type="checkbox" id="fxk" ${S.fx?"checked":""}><label for="fxk">Animations and effects</label></div><div class="sw"><input type="checkbox" id="cfk" ${S.conf?"checked":""}><label for="cfk">Confetti celebrations</label></div>
+ <div class="sw"><label>Week starts on</label><select id="wk" style="width:auto"><option value="0">Sunday</option><option value="1">Monday</option></select></div>
+ <div class="sw"><input type="checkbox" id="dn" ${S.dense?"checked":""}><label for="dn">Compact calendar</label></div>
+ <div class="sw"><input type="checkbox" id="sh" ${S.showH?"checked":""}><label for="sh">Show prep hours on days</label></div>
+ <div class="sw"><input type="checkbox" id="su" ${S.sun?"checked":""}><label for="su">Highlight Sundays in red</label></div>
+ ${lookUI()}${wUI("Dashboard widgets","dash",DASH)}${wUI("Insights widgets","ins",INSW)}<label class="l">Backup (copy to save, paste to restore)</label><textarea id="bk" rows="3">${esc(JSON.stringify(S))}</textarea>
+ <div class="seg"><button id="ld">Load backup</button><button id="wp">Reset everything</button><button class="pri" id="cl">Done</button></div>`;
+ D.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.t;save();render();cust()});
+ const on=(id,f)=>$(id).oninput=e=>{f(e.target);save();render()};
+ on("#ft",e=>S.font=e.value);on("#bgs",e=>S.bg=e.value);on("#ch",e=>S.ch=+e.value);on("#fxk",e=>S.fx=e.checked);on("#cfk",e=>S.conf=e.checked);$("#ft").value=S.font;$("#bgs").value=S.bg;on("#ac",e=>S.accent=e.value);on("#rd",e=>S.radius=+e.value);on("#fs",e=>S.fs=+e.value);on("#dn",e=>S.dense=e.checked);on("#sh",e=>S.showH=e.checked);on("#su",e=>S.sun=e.checked);on("#wk",e=>S.wk=+e.value);$("#wk").value=S.wk;
+ $("#ar").onclick=()=>{S.accent="";save();render();cust()};
+ $("#lks").onclick=()=>{const n=$("#lkn").value.trim()||"Look "+(S.looks.length+1),k={name:n};LK.forEach(x=>k[x]=S[x]);S.looks.push(k);save();cust()};
+ D.querySelectorAll("[data-la]").forEach(b=>b.onclick=()=>{const k=S.looks[b.dataset.la];LK.forEach(x=>{if(k[x]!==undefined)S[x]=k[x]});save();render();cust()});
+ D.querySelectorAll("[data-ld]").forEach(b=>b.onclick=()=>{S.looks.splice(b.dataset.ld,1);save();cust()});
+ D.querySelectorAll("[data-wv]").forEach(c=>c.onchange=()=>{const[k,id]=c.dataset.wv.split(":");S[k].hide=S[k].hide||{};S[k].hide[id]=!c.checked;save();render()});
+ D.querySelectorAll("[data-wm]").forEach(b=>b.onclick=()=>{const[k,i,dr]=b.dataset.wm.split(":"),list=k==="dash"?DASH:INSW,o=(S[k].order&&S[k].order.length?S[k].order:list.map(x=>x[0])).slice(),j=+i+ +dr;if(j<0||j>=o.length)return;[o[i],o[j]]=[o[j],o[i]];S[k].order=o;save();render();cust()});
+ $("#ld").onclick=()=>{try{S=Object.assign(structuredClone(DEF),JSON.parse($("#bk").value));save();render();toast("Backup loaded")}catch(e){toast("That backup text is not valid.")}};
+ $("#wp").onclick=()=>{if(confirm("Reset all subjects, leaves and notes?")){S=structuredClone(DEF);save();render();D.close()}};$("#cl").onclick=()=>D.close();D.showModal()}
+function summary(){const ls=Object.keys(S.ov).sort().filter(d=>def(d)==="office").map(d=>`${fmt(d)}: ${S.ov[d]} day`);
+ return `Semester 3 plan${S.profile.name?" for "+S.profile.name:""}\nLeaves: ${used()} used, ${reserved()} held for practicals, ${S.cap-used()-reserved()} free of ${S.cap}\nExams:\n${dated().map(e=>`${fmt(e.date)} ${e.name} (${e.type})`).join("\n")}\nLeave days:\n${ls.join("\n")||"None"}`}
+$("#auto").onclick=auto;$("#strat").onchange=e=>{S.strat=e.target.value;save()};$("#reset").onclick=()=>{snap();S.ov={};save();render();toast("Leaves cleared")};
+$("#undo").onclick=()=>{if(!H.length)return toast("Nothing to undo");S.ov=JSON.parse(H.pop());save();render()};$("#cust").onclick=cust;$("#shr").onclick=share;$("#ics").onclick=icsDlg;
+$("#copy").onclick=()=>{navigator.clipboard.writeText(summary()).then(()=>toast("Summary copied"),()=>toast("Copy blocked. Use the backup box in Customise."))};
+document.addEventListener("keydown",e=>{if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||S.tab!=="cal"||e.ctrlKey||e.metaKey)return;const k=e.key.toLowerCase(),mv={arrowleft:-1,arrowright:1,arrowup:-7,arrowdown:7}[k];
+ if(mv){e.preventDefault();sel=addD(sel,mv);render()}else if(k==="t"){sel=TODAY;render()}else if({o:"office",h:"half",f:"full"}[k])setS(sel,{o:"office",h:"half",f:"full"}[k])});
+render();
+</script></body></html>
